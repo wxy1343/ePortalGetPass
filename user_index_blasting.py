@@ -9,7 +9,7 @@ import ipaddress
 import re
 import sys
 from inspect import currentframe
-from typing import Dict, Any, Tuple
+from typing import Dict, Any
 from urllib.parse import parse_qs
 
 import httpx
@@ -17,30 +17,24 @@ import httpx
 from PBEWITHMD5andDES import decrypt
 
 
-async def user_index_parse(user_index: str) -> Tuple[int, str, int]:
+async def user_index_parse(user_index: str) -> list[str]:
     """
     解析user_index
     :param user_index:
     :return: (前缀,ip,账号)
     """
-    prefix = int(user_index.split('5f')[0])
-    ip = '.'.join([i[1::2] for i in user_index.split('5f')[1].split('2e')])
-    sid = int(user_index.split('5f')[2][1::2])
-    return prefix, ip, sid
+    return bytes.fromhex(user_index).decode().split('_')
 
 
 async def user_index_generator(prefix: str, ip: str, sid: int) -> str:
     """
-    通过ip和学号生成user_index
+    通过ip和账号生成user_index
     :param prefix:
     :param ip:
     :param sid:
     :return: user_index
     """
-    ip = '2e'.join(['3' + '3'.join(i) for i in ip.split('.')])
-    sid = ''.join(['3' + '3'.join(i) for i in str(sid)])
-    user_index = '5f'.join([prefix, ip, sid])
-    return user_index
+    return bytes.hex('_'.join([bytes.fromhex(prefix).decode(), ip, str(sid)]).encode())
 
 
 async def retrieve_name(var: Any) -> str:
