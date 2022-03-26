@@ -63,3 +63,5 @@ System.out.println(decrypt("68a9d05959330e4e")); // 123456
 ## 参考
 * [admintony/ePortalGetPass](https://github.com/admintony/ePortalGetPass)
 * [校园网认证系统-RG-SAM-Portal组件-用户信息泄露漏洞](http://admintony.com/校园网认证系统-RG-SAM-Portal组件-用户信息泄露漏洞.html)
+* [RG-SAM+认证计费管理平台](https://www.ruijie.com.cn/cp/yyxt-yygl/samx)
+* [RG-SAM+ ENTERPRISE_4.21(p14)_Build20210122](https://www.ruijie.com.cn/fw/rj/87101)
